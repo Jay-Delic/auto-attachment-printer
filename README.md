@@ -1,6 +1,6 @@
 # Auto Attachment Printer
 
-Easy to use & simple script to automatically print **PDF** attachments from a mailbox.
+Easy to use & simple script to automatically print **PDF** attachments from a mailbox every day at a specific time.
 
 ## Getting Started
 
