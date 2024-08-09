@@ -12,7 +12,6 @@
 
 WAKEUP="03:30" # Wake up at this time tomorrow and run a command
 
-echo " " | tee -a $LOGFILE
 DATE=`date "+%d-%m-%Y %H:%M:%S"`
 echo $DATE " | Booting Auto-Attachment-Process" | tee -a $LOGFILE
 
@@ -85,6 +84,7 @@ do
     
     echo " " | tee -a $LOGFILE
     echo $DATE " | Next run will be on" $NEXTRUN "at" $WAKEUP | tee -a $LOGFILE
+    echo " " | tee -a $LOGFILE
     sleep $SECS & 
     wait $!
     echo $DATE " | Starting process..." | tee -a $LOGFILE
