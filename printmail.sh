@@ -96,8 +96,8 @@ cd $BASEDIR
 touch $LOGFILE
 # fetch mail
 echo $DATE " | " $HOSTNAME " | Checking for new mail..." | tee -a $LOGFILE
-FETCHLOG=$(fetchmail -f $HOMEDIR/fetchmail.conf -L $LOGFILE)
-echo "$DATE  |  $HOSTNAME | $FETCHLOG" | tee -a $LOGFILE
+fetchmail -f $HOMEDIR/fetchmail.conf -L $LOGFILE
+
 # process new mails
 shopt -s nullglob
 for i in $MAILDIR/new/*
