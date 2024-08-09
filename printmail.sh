@@ -1,7 +1,7 @@
 #!/bin/bash
 # Parameters
 
-    LOGDATE=`date "+%Y%m%d"`
+    LOGDATE=`date "+%Y-%m"`
     BASEDIR=$(dirname $0)
     CURDIR=$(pwd)
     HOMEDIR=~/auto-attachment-printer 
@@ -12,17 +12,16 @@
 
 WAKEUP="03:30" # Wake up at this time tomorrow and run a command
 
-DATE=`date "+%d-%m-%Y %H:%M:%S"`
+DATE=`date "+%d-%m-%Y %H:%M:%S"`;
 echo $DATE " | " $HOSTNAME " | Booting Auto-Attachment-Process" | tee -a $LOGFILE
 
 # change directory
-echo $DATE " | " $HOSTNAME " | Switching directory to : $BASEDIR"
+echo $DATE " | " $HOSTNAME " | Switching directory to : $BASEDIR" | tee -a $LOGFILE
 cd $BASEDIR
 # create log file if it does not exist
 touch $LOGFILE
-date +%r-%-d/%-m/%-y >> $LOGFILE
 # fetch mail
-echo $DATE " | " $HOSTNAME " | Checking for new mail..."
+echo $DATE " | " $HOSTNAME " | Checking for new mail..." | tee -a $LOGFILE
 fetchmail -f $HOMEDIR/fetchmail.conf -L $LOGFILE
 # process new mails
 shopt -s nullglob
@@ -69,7 +68,7 @@ cd $CURDIR
 
 while :
 do
-    LOGDATE=`date "+%Y%m%d"`
+    LOGDATE=`date "+%Y-%m"`
     BASEDIR=$(dirname $0)
     CURDIR=$(pwd)
     HOMEDIR=~/auto-attachment-printer 
@@ -95,10 +94,10 @@ echo $DATE " | " $HOSTNAME " | Switching directory to : $BASEDIR"
 cd $BASEDIR
 # create log file if it does not exist
 touch $LOGFILE
-date +%r-%-d/%-m/%-y >> $LOGFILE
 # fetch mail
-echo $DATE " | " $HOSTNAME " | Checking for new mail..."
-fetchmail -f $HOMEDIR/fetchmail.conf -L $LOGFILE
+echo $DATE " | " $HOSTNAME " | Checking for new mail..." | tee -a $LOGFILE
+FETCHLOG=$(fetchmail -f $HOMEDIR/fetchmail.conf -L $LOGFILE)
+echo "$DATE  |  $HOSTNAME | $FETCHLOG" | tee -a $LOGFILE
 # process new mails
 shopt -s nullglob
 for i in $MAILDIR/new/*
